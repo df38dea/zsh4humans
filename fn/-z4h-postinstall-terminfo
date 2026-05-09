@@ -12,14 +12,14 @@ eval "$_z4h_opt"
     for hex in $Z4H_PACKAGE_DIR/[[:xdigit:]][[:xdigit:]](:t); do
       printf -v char "\\x$hex"
       [[ $char == $~pat ]] || continue
-      [[ -e ~/.terminfo/$hex ]] || zf_mkdir -p -- ~/.terminfo/$hex || return
-      cp -- $Z4H_PACKAGE_DIR/$hex/* ~/.terminfo/$hex/ || return
-      if [[ $char == [a-z] || ! ~/.terminfo/$char -ef ~/.terminfo/${(L)char}] ]]; then
-        [[ -e ~/.terminfo/$char ]]                       ||
-          zf_ln -s -- $hex ~/.terminfo/$char 2>/dev/null ||
-          zf_mkdir -p -- ~/.terminfo/$char               ||
+      [[ -e ~/.local/share/terminfo/$hex ]] || zf_mkdir -p -- ~/.local/share/terminfo/$hex || return
+      cp -- $Z4H_PACKAGE_DIR/$hex/* ~/.local/share/terminfo/$hex/ || return
+      if [[ $char == [a-z] || ! ~/.local/share/terminfo/$char -ef ~/.local/share/terminfo/${(L)char}] ]]; then
+        [[ -e ~/.local/share/terminfo/$char ]]                       ||
+          zf_ln -s -- $hex ~/.local/share/terminfo/$char 2>/dev/null ||
+          zf_mkdir -p -- ~/.local/share/terminfo/$char               ||
           return
-        cp -- $Z4H_PACKAGE_DIR/$hex/* ~/.terminfo/$char/ || return
+        cp -- $Z4H_PACKAGE_DIR/$hex/* ~/.local/share/terminfo/$char/ || return
       fi
       zf_rm -rf -- $Z4H_PACKAGE_DIR/$hex || return
     done

@@ -111,7 +111,7 @@ functions -Ms _z4h_err
 
 if [[ $ZSH_PATCHLEVEL == zsh-5.8-0-g77d203f && $_z4h_exe == */bin/zsh &&
       -e ${_z4h_exe:h:h}/share/zsh/5.8/scripts/relocate ]]; then
-  if [[ $TERMINFO != ~/.terminfo && $TERMINFO != ${_z4h_exe:h:h}/share/terminfo &&
+  if [[ $TERMINFO != ~/.local/share/terminfo && $TERMINFO != ${_z4h_exe:h:h}/share/terminfo &&
         -e ${_z4h_exe:h:h}/share/terminfo/$TERM[1]/$TERM ]]; then
     export TERMINFO=${_z4h_exe:h:h}/share/terminfo
   fi
@@ -371,8 +371,8 @@ function -z4h-cmd-init() {
       return 1
     fi
     if (( _z4h_installed_something )); then
-      if [[ $TERMINFO != ~/.terminfo && -e ~/.terminfo/$TERM[1]/$TERM ]]; then
-        export TERMINFO=~/.terminfo
+      if [[ $TERMINFO != ~/.local/share/terminfo && -e ~/.local/share/terminfo/$TERM[1]/$TERM ]]; then
+        export TERMINFO=~/.local/share/terminfo
       fi
       if (( need_restart )); then
         print -ru2 ${(%):-"%F{3}z4h%f: restarting %F{2}zsh%f"}
